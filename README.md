@@ -30,6 +30,18 @@ $ module avail
 ```
 miRQuant requires several applications.
 
-The required applications are:
-cutadapt
-blast
+The required applications are:  
+cutadapt  
+blast  
+bedtools  
+SHRiMP  
+
+While modules can be loaded individually by typing:
+```
+$ module load blast
+$ module load bedtools
+ect...
+```
+this can be tedious when you have many modules required for a pipeline.  One alternative is to create a file containing the environmental variables (modules, paths, ect.) we want to use for the pipeline.  The uncENV.sh has all the necessary variables we need for the pipeline!  Lets take a look at this file.
+
+`$ nano uncENV.sh`
