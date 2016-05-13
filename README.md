@@ -151,8 +151,8 @@ Pause for ~10 seconds, then confirm your job is running.
 
 ```
 $ bjobs
-JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME          # Should see somthing like this
-186010  mattkan RUN   day        killdevil-l donor_pool2 *leA.fastq May 13 15:19         #
+JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
+186010  mattkan RUN   day        killdevil-l donor_pool2 *leA.fastq May 13 15:19
 ```
 Continue to check until the job finishes, the type `$ more 01_logs/chainSubmission.log`.  This is the log file for the chainSubmission.sh run of the script.  In this file you'll see the output for the various programs which were 'wrapped' together in chainSubmission.sh.  Logs should be checked after every run, as this is where you are likely to catch errors which may have occured while running a pipeline.
 
