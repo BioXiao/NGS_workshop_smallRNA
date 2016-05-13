@@ -41,7 +41,7 @@ The clusters (Killdevil and Kure) have many programs and applications already in
 ```
 $ module avail
 ```
-miRQuant requires several applications.
+miRquant requires several applications.
 
 The required applications are:  
 cutadapt  
@@ -113,12 +113,14 @@ where:
 06_final_output_scripts is where scripts used for the final assembly of the data is stored
 ```
 
-Next we will take a peek at our sequencing data.
+Next we'll take a look within our 03_samples folder.
 
 ```
 $ cd 03_samples
 $ ls
 SampleA.adaptor  SampleA.fastq
+$ head SampleA.adaptor
+TGGAATTCTCGGGTGCCAAGGAACTCCAGTCACATCACGATCTCGTATGCCGTCTTCTGCTTG
 $ head SampleA.fastq
 @D1317JN1:309:C88CWACXX:1:1101:2446:2123 1:N:0:ATCACG
 TGGAGTGTGACAATGGTGTTTTGGAATTCTCGGGTGCCAAGGAACTCCAGT
@@ -131,7 +133,7 @@ GTCTACGGCCATACCACCCTGTGGAATTATCGGGTGCCAAGGAACTCCAGT
 @D1317JN1:309:C88CWACXX:1:1101:2353:2170 1:N:0:ATCACG
 AATACCGGGTGCTGTAGGCTTTTGGAATTCTCGGGTGCCAAGGAACTCCAG
 ```
-
+For the fastq output, this is the information for our first two (and half of the third) reads.  For each read, the first line starts with a '@' and is followed by a read identifier containing various bits of information (instrument name, flowcell id, ect).  The second line contains the raw sequence letters.  The third line is a '+'.  The fourth line encodes the quality value for the sequence in the second line.  Each read contains a portion of the 3' adapter sequnce, which will have to be trimmed.
 
 
 
