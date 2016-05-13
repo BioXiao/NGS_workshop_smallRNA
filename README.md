@@ -31,7 +31,7 @@ Switch from the home directory to your scratch directory, by typing `$ cd /netsc
 The necessary miRquant scripts, resource files, and data have been compressed and can be copied from /netscr/mattkank/miRquant.tar.gz.  To copy the files over and un-compress them, we will submit the job to LSF by typing:
 
 ```
-bsub cp /netscr/mattkank/miRquant.tar.gz . && tar -zxvf miRquant.tar.gz
+$ cp /netscr/mattkank/miRquant.tar.gz . && tar -zxvf miRquant.tar.gz  && cd miRquant
 ```
 
 #### Load pipeline requirements
@@ -87,6 +87,52 @@ Currently Loaded Modulefiles:
 ```
 
 OK, we should now be setup to run the pipeline on non-descript SAMPLE_A.fastq.
+
+## Running miRquant
+
+Let's make sure first that we are in the correct location on the file system.
+
+```
+$ pwd
+/netscr/ONYEN/miRquant
+```
+
+Take a look at what the directory structure is.
+
+```
+$ ls
+00_documentation  02_software  05_scripts        chainSubmission.sh  process_all_summary2tab.pl  runC.sh
+01_logs           03_samples   09_final_scripts  post_runC.sh        resources                   uncENV.sh
+
+where:
+01_logs is where the pipeline logs will be stored as they are produced (currently empty)
+02_software is where some of the programs necessary for the pipeline are stored
+03_samples is where the sequencing data and pipeline outputs will be stored
+04_resources is where miRNA resource files required for the pipeline are stored
+05_scripts is where various scripts called on by the pipeline are stored
+06_final_output_scripts is where scripts used for the final assembly of the data is stored
+```
+
+Next we will take a peek at our sequencing data.
+
+```
+$ cd 03_samples
+$ ls
+SampleA.adaptor  SampleA.fastq
+$ head SampleA.fastq
+@D1317JN1:309:C88CWACXX:1:1101:2446:2123 1:N:0:ATCACG
+TGGAGTGTGACAATGGTGTTTTGGAATTCTCGGGTGCCAAGGAACTCCAGT
++
+BB@FFDEDHHHFHIHIGHIJJJJJGHIJJJJJJJJIJJHHIJJJJJJJJHF
+@D1317JN1:309:C88CWACXX:1:1101:2294:2127 1:N:0:ATCACG
+GTCTACGGCCATACCACCCTGTGGAATTATCGGGTGCCAAGGAACTCCAGT
++
+?=?DD=DD1C?ADE3CBEFI>AE3@??D*?DD?DDDDDDD9CDEDED7A@=
+@D1317JN1:309:C88CWACXX:1:1101:2353:2170 1:N:0:ATCACG
+AATACCGGGTGCTGTAGGCTTTTGGAATTCTCGGGTGCCAAGGAACTCCAG
+```
+
+
 
 
 
