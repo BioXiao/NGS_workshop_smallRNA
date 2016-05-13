@@ -9,6 +9,7 @@ ____
 
 + \* -- wild card
 + # -- comment out
++ + . -- current working directory
 + Relative paths versus absolute paths
 + On command line notation
 + On /proj/seq/data
@@ -21,9 +22,17 @@ ____
 
 Login to Killdevil with your onyen.
 
-#### Change to your scratch directorys
+#### Change to your scratch directory
 
 Switch from the home directory to your scratch directory, by typing `$ cd /netscr/ONYEN`, where ONYEN is your UNC onyen.
+
+#### Copy scripts and data to your scratch directory
+
+The necessary miRquant scripts, resource files, and data have been compressed and can be copied from /netscr/mattkank/miRquant.tar.gz.  To copy the files over and un-compress them, we will submit the job to LSF by typing:
+
+```
+bsub cp /netscr/mattkank/miRquant.tar.gz . && tar -zxvf miRquant.tar.gz
+```
 
 #### Load pipeline requirements
 
@@ -39,6 +48,7 @@ cutadapt
 blast  
 bedtools  
 SHRiMP  
+R
 
 While modules can be loaded individually by typing:
 ```
@@ -75,4 +85,8 @@ uncENV.sh contains the location of programs used by the pipeline, the location o
 Currently Loaded Modulefiles:
   1) null              2) r/2.15.1          3) bowtie/1.1.0      4) samtools/1.3      5) bedtools/2.25.0   6) bamtools/1.0.2    7) perl/5.12.0
 ```
+
+OK, we should now be setup to run the pipeline on non-descript SAMPLE_A.fastq.
+
+
 
