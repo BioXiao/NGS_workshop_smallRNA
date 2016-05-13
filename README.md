@@ -9,7 +9,8 @@ ____
 
 + \* -- wild card
 + # -- comment out
-+ + . -- current working directory
++ . -- current working directory
++ && -- chains commands together; do this command, then this one
 + Relative paths versus absolute paths
 + On command line notation
 + On /proj/seq/data
@@ -135,6 +136,14 @@ AATACCGGGTGCTGTAGGCTTTTGGAATTCTCGGGTGCCAAGGAACTCCAG
 ```
 For the fastq output, this is the information for our first two (and half of the third) reads.  For each read, the first line starts with a '@' and is followed by a read identifier containing various bits of information (instrument name, flowcell id, ect).  The second line contains the raw sequence letters.  The third line is a '+'.  The fourth line encodes the quality value for the sequence in the second line.  Each read contains a portion of the 3' adapter sequnce, which will have to be trimmed.
 
+Change back to the main directory by typing `$ cd ..`.
 
+#### Section 1, chainSubmission.sh
+
+The first part of miRquant trims the adapter, aligns RNAs perfectly matching the genome with Bowtie, creates genomic 'windows' for the SHRiMP alignment using bedtools, and aligns small RNAs containing mismatches to these windows using SHRiMP.  This is something you'll come across often as you use various pipelines, the stringing together of well-written programs to achieve the goal (if a toilet is available, why dig a hole in the woods).  All these programs brought together and connected in a 'wrapper' script, in this case chainSubmission.sh.  To run chainSubmission.sh, type:
+
+```
+$ bsub -o 01_logs/chainSubmission.log bash chainSubmission.sh mmu /netscr/ONYEN/miRquant/03_Samples
+```
 
 
