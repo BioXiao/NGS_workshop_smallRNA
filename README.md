@@ -19,9 +19,13 @@ ____
 
 #### Log in
 
-Login to Killdevil with your onyen
+Login to Killdevil with your onyen.
 
-#### Load modules
+#### Change to your scratch directorys
+
+Switch from the home directory to your scratch directory, by typing `$ cd /netscr/ONYEN`, where ONYEN is your UNC onyen.
+
+#### Load pipeline requirements
 
 The clusters (Killdevil and Kure) have many programs and applications already installed.  To call on them, you simply need to call on them.  Let's take a look at which applications are available to us, type:
 
@@ -43,9 +47,28 @@ $ module load bedtools
 ect...
 ```
 this can be tedious when you have many modules required for a pipeline.  One alternative is to create a file containing the environmental variables (modules, paths, ect.) we want to use for the pipeline.  The uncENV.sh has all the necessary variables we need for the pipeline!  Lets take a look at this file.
+```
+$ cat uncENV.sh
 
-`$ cat uncENV.sh`
+# Adds locations to system path, so the system knows where to look for programs
+export PATH=/netscr/mattkank/miRquant/02_software/bin:./:$PATH
+export PATH=$PATH:/netscr/mattkank/miRquant/02_software/SHRiMP_2_2_2/bin
+export PYTHONPATH=/netscr/mattkank/miRquant/02_software/python/
 
+# Sets location of required components to variables
+export SHRIMP_FOLDER=/netscr/mattkank/miRquant/02_software/SHRiMP_2_2_2
+export CHROMO_SIZE=/netscr/mattkank/miRquant/02_software/resources/mm9.chromSizes
+export JB_GENOME_DIR=/proj/seq/data/mm9/bowtie_path/base/
+export MMU_GENOME=/proj/seq/data/MM9_UCSC/Sequence/WholeGenomeFasta/genome.fa
+
+# Loads the modules necessary for the pipeline
+module load r/2.15.1
+module load bowtie/1.1.0
+module load samtools/1.3
+module load bedtools/2.25.0
+module load bamtools/1.0.2
+module load perl/5.12.0
+```
 uncENV.sh contains the location of programs used by the pipeline, the location of various files called on by the pipeline, and the commands to load the necessary modules.  We can execute the code within this file by typing `source uncENV.sh`.  If we type `module list` we should see the following output, confirming the necessary modules were loaded.
 
 ```
