@@ -11,6 +11,7 @@ ____
 + # -- comment out
 + . -- current working directory
 + && -- chains commands together; do this command, then this one
++ Tab-completion
 + Relative paths versus absolute paths
 + On command line notation
 + On /proj/seq/data
@@ -103,7 +104,7 @@ Take a look at what the directory structure is.
 ```
 $ ls
 00_documentation  02_software  05_scripts        chainSubmission.sh  process_all_summary2tab.pl  runC.sh
-01_logs           03_samples   09_final_scripts  post_runC.sh        resources                   uncENV.sh
+01_logs           03_samples   06_final_scripts  post_runC.sh        resources                   uncENV.sh
 
 where:
 01_logs is where the pipeline logs will be stored as they are produced (currently empty)
@@ -138,12 +139,29 @@ For the fastq output, this is the information for our first two (and half of the
 
 Change back to the main directory by typing `$ cd ..`.
 
-#### Section 1, chainSubmission.sh
+#### Section 1: chainSubmission.sh
 
-The first part of miRquant trims the adapter, aligns RNAs perfectly matching the genome with Bowtie, creates genomic 'windows' for the SHRiMP alignment using bedtools, and aligns small RNAs containing mismatches to these windows using SHRiMP.  This is something you'll come across often as you use various pipelines, the stringing together of well-written programs to achieve the goal (if a toilet is available, why dig a hole in the woods).  All these programs brought together and connected in a 'wrapper' script, in this case chainSubmission.sh.  To run chainSubmission.sh, type:
+The first part of miRquant trims the adapter, aligns RNAs perfectly matching the genome with Bowtie, creates genomic 'windows' for the SHRiMP alignment using bedtools, and aligns small RNAs containing mismatches to these windows using SHRiMP.  This is something you'll come across often as you use various pipelines, the stringing together of well-written programs to achieve the goal (if a toilet is available, why dig a hole in the woods).  All these programs brought together and connected in a 'wrapper' script, in this case chainSubmission.sh.  To run chainSubmission.sh, enter:
 
 ```
 $ bsub -o 01_logs/chainSubmission.log bash chainSubmission.sh mmu /netscr/ONYEN/miRquant/03_Samples
+```
+
+Pause for ~10 seconds, then confirm your job is running.
+
+```
+$ bjobs
+JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME          # Should see somthing like this
+186010  mattkan RUN   day        killdevil-l donor_pool2 *leA.fastq May 13 15:19         #
+```
+Continue to check until the job finishes, the type `$ more 01_logs/chainSubmission.log`.  This is the log file for the chainSubmission.sh run of the script.  In this file you'll see the output for the various programs which were 'wrapped' together in chainSubmission.sh.  Logs should be checked after every run, as this is where you are likely to catch errors which may have occured while running a pipeline.
+
+#### Section 2 & 3: runC.sh & post_runC.sh
+
+The second part of miRquant processes the results from the Bowtie alignment and SHRiMP alignment in the first stage and separates these based on length, internal nucleotide edits, and 3' additions.  This part also determines if a read corresponds to a known miRNA.  The third part combines the results from the second part into a single file.  To run this second part, be very mindful of tab-completion and enter:
+
+```
+$ bash runC.sh /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateFiles/g1Results/CHR*.results
 ```
 
 
