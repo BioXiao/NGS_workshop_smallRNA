@@ -161,7 +161,7 @@ Continue to check until the job finishes, the type `$ more 01_logs/chainSubmissi
 The second part of miRquant processes the results from the Bowtie alignment and SHRiMP alignment in the first stage and separates these based on length, internal nucleotide edits, and 3' additions.  This part also determines if a read corresponds to a known miRNA.  The third part combines the results from the second part into a single file.  To run this second part, be very mindful of tab-completion and enter:
 
 ```
-$ bash runC.sh /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateFiles/g1Results/CHR*.results
+$ bash runC.sh mmu /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateFiles/g1Results/CHR*.results
 ```
 
 
