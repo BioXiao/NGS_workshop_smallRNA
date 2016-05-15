@@ -163,5 +163,19 @@ The second part of miRquant processes the results from the Bowtie alignment and 
 ```
 $ bash runC.sh mmu /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateFiles/g1Results/CHR*.results
 ```
+As you can see after entering this command, this script submits many jobs.  In the g1Results directory are the alignment results separated by chromosome.  The same analysis will be applied to each chromosome results, so instead of doing the analysis is sesquential order, each chromosome will be submitted as a individual job and the analysis will be done in parallel (which will speed up the process significantly).  Once each of these jobs is complete, enter:
 
+```
+$ bash post_runC.sh /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateFiles/g1Results/
+```
+In the previous step, runC.sh created results files on a chromosome by chromosome basis.  The above command combines the multiple chromosome results files into a single results files.  
+
+#### Section 4: process_summary2tab.pl
+
+The data has been processed at this point, but still isn't in a very human readable format.  To convert this data into a more usable format, enter:
+
+```
+$ bsub -o 01_logs/process_sum.log perl process_summary2tab.pl /netscr/ONYEN/miRquant/ mmu /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateResults/g1Results/shift_summary.txt
+```
+This 
 
