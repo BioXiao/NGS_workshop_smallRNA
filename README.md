@@ -123,6 +123,8 @@ $ ls
 SampleA.adaptor  SampleA.fastq
 $ head SampleA.adaptor
 TGGAATTCTCGGGTGCCAAGGAACTCCAGTCACATCACGATCTCGTATGCCGTCTTCTGCTTG
+$ wc -l *
+4000000 SampleA.fastq
 $ head SampleA.fastq
 @D1317JN1:309:C88CWACXX:1:1101:2446:2123 1:N:0:ATCACG
 TGGAGTGTGACAATGGTGTTTTGGAATTCTCGGGTGCCAAGGAACTCCAGT
@@ -196,7 +198,7 @@ This is the bulk of the pipeline, lets bring it all together and check how out s
 
 ## Bringing it all together - Final analyses scripts
 
-These final scripts to get a complete output are in the '06_final_output_scripts', move there by entering `$ cd 06_final_output_scripts`.
+These final scripts to get a complete output are in the '06_final_output_scripts', move there by entering `$ cd 06_final_output_scripts`.  We will also need to load a certain version of python, do this by entering `$ module load python/2.7.6`.
 
 #### Generate mapping statistics
 
@@ -225,3 +227,72 @@ Total mapped to miRs	 474786.71503216
 Total mapped to tRNAs	 16298.747979798
 % of total mapped to tRNAs	2.34093413113626%
 ```
+For most samples we see the following: the % trimmed around 10%, % too short around 5-10%, % mapped around 80-85%, % mapped to miRs around 70-75%, and the % mapped to tRNAs under 10%.  If the statistics vary greatly from these expected numbers, it could be that the samples are of low quality or some other interesting biological process is occuring.
+
+#### Read length distribution
+
+Next we will look at the read length distribution for our sample.  As miRNAs are the major species of small RNA and the length of a mature miRNA is ~22 nucleotides long, we will expect a spike at 22 nucleotides.  To check the length distributions, enter:
+
+```
+$ python lenDist.py /netscr/mattkank/miRquant/03_samples/SampleA./IntermediateFiles/*1.fq --image
+Loading required package: methods
+null device 
+          1 
+$ cat lenDist.tsv
+	SampleA._O10_E1.fq
+14	0.0284081962159
+15	0.0354597896166
+16	0.0226839746191
+17	0.0265773767939
+18	0.0366186062707
+19	0.0349807381385
+20	0.0400263034747
+21	0.124606612241
+22	0.264064929218
+23	0.135104714887
+24	0.0451927405958
+25	0.0201234888255
+26	0.018172906534
+27	0.0174487847395
+28	0.0179378164567
+29	0.0132049652799
+30	0.0155625195446
+31	0.0211547802019
+32	0.0132094009417
+33	0.0152209735834
+34	0.0116369588215
+35	0.0102641214839
+36	0.00735210948988
+37	0.00621990680674
+38	0.00705270231608
+39	0.005678756063
+40	0.00285323947473
+41	0.00317815170407
+42	4.43566183401e-06
+```
+In addition to the text file, the script outputs an image, 'lenDistGraph.png'.  To look at this, bring it to your local computer using filezilla, fugu, or scp.  On the graph there is a large peak at 22nt and a smaller peak around 30nt.  These are the miRNA and tRNA peaks, respectively.  If you see a high amount of other sequence lengths, this can be indicitive of degraded RNA.
+
+#### miRNA expression level
+
+We will have many expressed miRNAs, but likely the highly expressed miRNAs are the biologically relevant ones.  To calculate the highly expressed miRNAs, enter:
+
+```
+$ python genNormalRPM.py mmu /netscr/mattkank/miRquant/03_samples/SampleA./TAB_lenDist_summary.txt
+
+$ ls RPM*
+RPM_all.tsv  RPM_miRs_only.tsv  RPM_miRs_over_100.tsv
+
+$ head RPM_miRs_over_1000.tsv
+        /netscr/mattkank/miRquant/03_samples/SampleA./TAB_lenDist_summary.txt
+mmu-mir-15a-5p	179.533278725
+mmu-mir-191-5p	1612.92697606
+mmu-let-7a-2-5p	11947.4368048
+mmu-mir-10a-5p_+_1	393.536946964
+mmu-mir-92a-1-3p	7371.63642444
+mmu-mir-221-3p	1928.90554662
+mmu-mir-101b-3p	2553.68135658
+mmu-mir-126-3p	211.13113578
+mmu-let-7a-1-5p	12303.2717632
+```
+
+These 
