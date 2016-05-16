@@ -33,12 +33,16 @@ Switch from the home directory to your scratch directory, by typing `$ cd /netsc
 The necessary miRquant scripts, resource files, and data have been compressed and can be copied from /netscr/mattkank/miRquant.tar.gz.  To copy the files over and un-compress them, we will submit the job to LSF by typing:
 
 ```
-$ cp /netscr/mattkank/miRquant.tar.gz . && tar -zxvf miRquant.tar.gz  && cd miRquant
+$ bsub 'cp /netscr/mattkank/miRquant.tar.gz . && tar -zxvf miRquant.tar.gz'
+
+$ cd miRquant
+$ pwd
+/netscr/ONYEN/miRquant
 ```
 
 #### Load pipeline requirements
 
-The clusters (Killdevil and Kure) have many programs and applications already installed.  To call on them, you simply need to call on them.  Let's take a look at which applications are available to us, type:
+The clusters (Killdevil and Kure) have many programs and applications already installed.  To call on them, you simply need to load the module.  Let's take a look at which applications are available to us, type:
 
 ```
 $ module avail
@@ -88,7 +92,7 @@ Currently Loaded Modulefiles:
   1) null              2) r/2.15.1          3) bowtie/1.1.0      4) samtools/1.3      5) bedtools/2.25.0   6) bamtools/1.0.2    7) perl/5.12.0
 ```
 
-OK, we should now be setup to run the pipeline on non-descript SAMPLE_A.fastq.
+OK, we should now be setup to run the pipeline on the non-descript SampleA.fastq.
 
 ## Running miRquant
 
