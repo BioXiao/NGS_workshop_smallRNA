@@ -107,8 +107,8 @@ Take a look at what the directory structure is.
 
 ```
 $ ls
-00_documentation  02_software  05_scripts        chainSubmission.sh  process_all_summary2tab.pl  runC.sh
-01_logs           03_samples   06_final_scripts  post_runC.sh        resources                   uncENV.sh
+01_logs      03_samples    05_scripts               chainSubmission.sh  process_all_summary2tab.pl  uncENV.sh
+02_software  04_resources  06_final_output_scripts  post_runC.sh        runC.sh
 
 where:
 01_logs is where the pipeline logs will be stored as they are produced (currently empty)
