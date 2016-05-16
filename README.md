@@ -192,4 +192,12 @@ mmu-let-7f-2-5p	Huwe1	0	GAGGTAG	0.99504171826432	12392.1611111111	11955.69444444
 mmu-let-7c-2-5p	Mirlet7c-2	0	GAGGTAG	0.995775373609673	12335.349859944	10047.0617647059	1409.23333333333	279.333333333333	417.22619047619	5.5	44.7857142857143	2.14285714285714	38.8333333333333	39.65	2	2	5.5	18.5	0	0.5	0	7.5	3	0.833333333333333	0.5	0	2.5	1.75	0	1.5	0	0	2.5	1.5	0	0	0	0	0	0	0	0	0.5	0	0	0	0	0	0	0.5	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0.5	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00
 mmu-let-7g-5p	Wdr82	0	GAGGTAG	0.994159700569481	11376.6438596491	10782.0105263158	89.3	45	311.5	16	47.3333333333333	46.5	22	2	0	0	0	1	1	7	0	0	0	1	2	0	0	1	0	0	0	0	01	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	00	0	0	0	0	0	0	0	0	0
 ```
+This is the bulk of the pipeline, lets bring it all together and check how out sample sequencing analysis went.
 
+## Bringing it all together - Final analyses scripts
+
+These final scripts to get a complete output are in the '06_final_output_scripts', move there by entering `$ cd 06_final_output_scripts`.
+
+#### Generate mapping statistics
+
+The first 
