@@ -295,4 +295,8 @@ mmu-mir-126-3p	211.13113578
 mmu-let-7a-1-5p	12303.2717632
 ```
 
-These 
+These are our highly expressed miRNAs in our sample.  If we had a control, we could compare the two samples to see which miRNAs change between the treatment and the sample.  We could also look at the highly expressed miRNAs and see which mRNAs they target.
+
+This is a beginning primer on smRNA-seq analysis according to the pipeline I use.  There are many other smRNA-seq analysis pipelines out there doing very similar things, and choosing the best bioinformatics tool can be half the challenge when approaching any analyses.  The best approach to making a choice (that I've found) is through reading the literature or googling extensively (SEQanswers and biostars especially).
+
+Any questions?
