@@ -150,7 +150,7 @@ Change back to the main directory by typing `$ cd ..`.
 The first part of miRquant trims the adapter, aligns RNAs perfectly matching the genome with Bowtie, creates genomic 'windows' for the SHRiMP alignment using bedtools, and aligns small RNAs containing mismatches to these windows using SHRiMP.  This is something you'll come across often as you use various pipelines, the stringing together of well-written programs to achieve the goal (if a toilet is available, why dig a hole in the woods).  All these programs brought together and connected in a 'wrapper' script, in this case chainSubmission.sh.  To run chainSubmission.sh, enter:
 
 ```
-$ bsub -o 01_logs/chainSubmission.log bash chainSubmission.sh mmu /netscr/ONYEN/miRquant/03_Samples/SampleA.fastq
+$ bsub -o 01_logs/chainSubmission.log bash chainSubmission.sh mmu /netscr/ONYEN/miRquant/03_samples/SampleA.fastq
 ```
 
 Pause for ~10 seconds, then confirm your job is running.
