@@ -200,4 +200,28 @@ These final scripts to get a complete output are in the '06_final_output_scripts
 
 #### Generate mapping statistics
 
-The first 
+Lets start by looking at some quality control statistics from the analyses.  The 'generate_mapping__info_table.pl' will bring together mapping statistics, including total mapping, miR mapping, and tRNA mapping.  Up to this point we have been using the absolute path for the files.  This script requires the relative path.  To run this script, enter:
+
+```
+$ perl generate_mapping_info_table.pl ../03_samples/SampleA/IntermediateFiles/*O10_E1.fq
+
+$ cat MappingTableInfo.tsv
+
+Sample name	SampleA
+File name	/netscr/mattkank/miRquant/03_samples/SampleA.fastq
+Total reads	1000000.00000000000000000000
+Trimmed reads	901782.00000000000000000000
+% Trimmed reads	90.1782%
+Short reads	70483.00000000000000000000
+% Short	7.0483%
+Exact match to genome	590247
+% EM	65.4534022635182%
+No exact match to genome	311535
+% NEM	34.5465977364818%
+Total mapped reads	 696249.747611942
+% Mapped	77.2082108105886%
+Total mapped to miRs	 474786.71503216
+% of total mapped to miRs	68.1920125157136%
+Total mapped to tRNAs	 16298.747979798
+% of total mapped to tRNAs	2.34093413113626%
+```
