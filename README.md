@@ -127,7 +127,7 @@ $ ls
 SampleA.adaptor  SampleA.fastq
 $ head SampleA.adaptor
 TGGAATTCTCGGGTGCCAAGGAACTCCAGTCACATCACGATCTCGTATGCCGTCTTCTGCTTG
-$ wc -l *
+$ wc -l SampleA.fastq
 4000000 SampleA.fastq
 $ head SampleA.fastq
 @D1317JN1:309:C88CWACXX:1:1101:2446:2123 1:N:0:ATCACG
