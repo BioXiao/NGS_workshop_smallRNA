@@ -181,7 +181,7 @@ In the previous step, runC.sh created results files on a chromosome by chromosom
 The data has been processed at this point, but still isn't in a very human readable format.  To convert this data into a more usable format, enter:
 
 ```
-$ bsub -o 01_logs/process_sum.log perl process_summary2tab.pl /netscr/ONYEN/miRquant/ mmu /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateResults/g1Results/shift_summary.txt
+$ bsub -o 01_logs/process_sum.log perl process_all_summary2tab.pl /netscr/ONYEN/miRquant/ mmu /netscr/ONYEN/miRquant/03_samples/SampleA./IntermediateResults/g1Results/shift_summary.txt
 ```
 This scripts combines the information into a more human readable format that can be imported into excel.  The files that are produced by this script can be seen by entering `$ ls /netscr/ONYEN/miRquant/03_samples/SampleA./`.  The files whose names begin with 'TAB' are the results files.  Lets look at the top of one, enter:
 
