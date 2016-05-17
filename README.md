@@ -202,36 +202,47 @@ This is the bulk of the pipeline, lets bring it all together and check how out s
 
 ## Bringing it all together - Final analyses scripts
 
-These final scripts to get a complete output are in the '06_final_output_scripts', move there by entering `$ cd 06_final_output_scripts`.  We will also need to load a certain version of python, do this by entering `$ module load python/2.7.6`.
+These final scripts to get a complete output are in the '06_final_output_scripts', move there by entering `$ cd 06_final_output_scripts`.  We will also need to load a certain version of python, do this by entering `$ module load python/2.7.6`.  Before we start on the final steps, we will make sure our environment is ready to run the final scripts, enter:
+
+```
+$ ls
+generate_adapter_files.py       genNormalRPM.py  lenDist.py
+generate_mapping_info_table.pl  lenDistGraph.R   smRNAseq_correlation.R
+
+$ module list
+Currently Loaded Modulefiles:
+  1) null              3) bowtie/1.1.0      5) bedtools/2.25.0   7) perl/5.12.0
+  2) r/2.15.1          4) samtools/1.3      6) bamtools/1.0.2    8) python/2.7.6
+```
 
 #### Generate mapping statistics
 
 Lets start by looking at some quality control statistics from the analyses.  The 'generate_mapping__info_table.pl' will bring together mapping statistics, including total mapping, miR mapping, and tRNA mapping.  Up to this point we have been using the absolute path for the files.  This script requires the relative path.  To run this script, enter:
 
 ```
-$ perl generate_mapping_info_table.pl ../03_samples/SampleA/IntermediateFiles/*O10_E1.fq
+$ perl generate_mapping_info_table.pl ../03_samples/SampleA./*.stats
 
 $ cat MappingTableInfo.tsv
 
 Sample name	SampleA
-File name	/netscr/mattkank/miRquant/03_samples/SampleA.fastq
-Total reads	1000000.00000000000000000000
-Trimmed reads	901782.00000000000000000000
-% Trimmed reads	90.1782%
-Short reads	70483.00000000000000000000
-% Short	7.0483%
-Exact match to genome	590247
-% EM	65.4534022635182%
-No exact match to genome	311535
-% NEM	34.5465977364818%
-Total mapped reads	 696249.747611942
-% Mapped	77.2082108105886%
-Total mapped to miRs	 474786.71503216
-% of total mapped to miRs	68.1920125157136%
-Total mapped to tRNAs	 16298.747979798
-% of total mapped to tRNAs	2.34093413113626%
+File name	/netscr/mattkank/miRquant/03_samples/test.fastq
+Total reads	100000.00000000000000000000
+Trimmed reads	90252.00000000000000000000
+% Trimmed reads	90.252%
+Short reads	7012.00000000000000000000
+% Short	7.012%
+Exact match to genome	57277
+% EM	63.4634135531623%
+No exact match to genome	29121
+% NEM	32.2663209679564%
+Total mapped reads	 61752.00247733
+% Mapped	68.4217551714422%
+Total mapped to miRs	 46831.3644750544
+% of total mapped to miRs	75.8378070286009%
+Total mapped to tRNAs	 353
+% of total mapped to tRNAs	0.571641381394216%
 ```
-For most samples we see the following: the % trimmed around 10%, % too short around 5-10%, % mapped around 80-85%, % mapped to miRs around 70-75%, and the % mapped to tRNAs under 10%.  If the statistics vary greatly from these expected numbers, it could be that the samples are of low quality or some other interesting biological process is occuring.
+For most samples we see the following: the % trimmed around 90%, % too short around 5-10%, % mapped around 80-85%, % mapped to miRs around 70-75%, and the % mapped to tRNAs under 10%.  If the statistics vary greatly from these expected numbers, it could be that the samples are of low quality or some other interesting biological process is occuring.
 
 #### Read length distribution
 
@@ -244,41 +255,41 @@ null device
           1 
 $ cat lenDist.tsv
 	SampleA._O10_E1.fq
-14	0.0284081962159
-15	0.0354597896166
-16	0.0226839746191
-17	0.0265773767939
-18	0.0366186062707
-19	0.0349807381385
-20	0.0400263034747
-21	0.124606612241
-22	0.264064929218
-23	0.135104714887
-24	0.0451927405958
-25	0.0201234888255
-26	0.018172906534
-27	0.0174487847395
-28	0.0179378164567
-29	0.0132049652799
-30	0.0155625195446
-31	0.0211547802019
-32	0.0132094009417
-33	0.0152209735834
-34	0.0116369588215
-35	0.0102641214839
-36	0.00735210948988
-37	0.00621990680674
-38	0.00705270231608
-39	0.005678756063
-40	0.00285323947473
-41	0.00317815170407
-42	4.43566183401e-06
+	test._O10_E1.fq
+14	0.0292957496787
+15	0.0356778797146
+16	0.0226698577317
+17	0.0270686522182
+18	0.0372512520498
+19	0.0352014359793
+20	0.039500509684
+21	0.123565128751
+22	0.264758675708
+23	0.135996986216
+24	0.0442981872978
+25	0.0204095200106
+26	0.0180494615078
+27	0.016609050215
+28	0.0175508575987
+29	0.0131853033728
+30	0.0151021584009
+31	0.0216504897398
+32	0.0128418206799
+33	0.014758675708
+34	0.0118556929486
+35	0.010902805478
+36	0.00699153481363
+37	0.00591676638745
+38	0.00717989629039
+39	0.0055178832602
+40	0.00278110180384
+41	0.00341266675531
 ```
-In addition to the text file, the script outputs an image, 'lenDistGraph.png'.  To look at this, bring it to your local computer using filezilla, fugu, or scp.  On the graph there is a large peak at 22nt and a smaller peak around 30nt.  These are the miRNA and tRNA peaks, respectively.  If you see a high amount of other sequence lengths, this can be indicitive of degraded RNA.
+In addition to the text file, the script outputs an image, 'lenDistHistogram.png'.  To look at this, bring it to your local computer using filezilla, fugu, or scp.  On the graph there is a large peak at 22nt and a smaller peak around 30nt.  These are the miRNA and tRNA peaks, respectively.  If you see a high amount of other sequence lengths, this can be indicitive of degraded RNA.
 
 #### miRNA expression level
 
-We will have many expressed miRNAs, but likely the highly expressed miRNAs are the biologically relevant ones.  To calculate the highly expressed miRNAs, enter:
+We will have many expressed miRNAs, but likely those with only a couple reads aren't biologically relevant, so we will identify the highly expressed miRNAs.  To calculate the highly expressed miRNAs, enter:
 
 ```
 $ python genNormalRPM.py mmu /netscr/mattkank/miRquant/03_samples/SampleA./TAB_lenDist_summary.txt
@@ -287,20 +298,18 @@ $ ls RPM*
 RPM_all.tsv  RPM_miRs_only.tsv  RPM_miRs_over_100.tsv
 
 $ head RPM_miRs_over_1000.tsv
-        /netscr/mattkank/miRquant/03_samples/SampleA./TAB_lenDist_summary.txt
-mmu-mir-15a-5p	179.533278725
-mmu-mir-191-5p	1612.92697606
-mmu-let-7a-2-5p	11947.4368048
-mmu-mir-10a-5p_+_1	393.536946964
-mmu-mir-92a-1-3p	7371.63642444
-mmu-mir-221-3p	1928.90554662
-mmu-mir-101b-3p	2553.68135658
-mmu-mir-126-3p	211.13113578
-mmu-let-7a-1-5p	12303.2717632
+	/netscr/mattkank/miRquant/03_samples/test./TAB_lenDist_summary.txt
+mmu-mir-15a-5p	259.100909414
+mmu-mir-191-5p	1829.90017274
+mmu-let-7a-2-5p	13580.5630124
+mmu-mir-10a-5p_+_1	485.814205151
+mmu-mir-92a-1-3p	8064.5158055
+mmu-mir-101b-3p	2671.97812833
+mmu-let-7a-1-5p	14062.3287658
+mmu-mir-30e-5p	1833.94862444
+mmu-mir-22-3p	22768.4924147
 ```
 
 These are our highly expressed miRNAs in our sample.  If we had a control, we could compare the two samples to see which miRNAs change between the treatment and the sample.  We could also look at the highly expressed miRNAs and see which mRNAs they target.
 
-This is a beginning primer on smRNA-seq analysis according to the pipeline I use.  There are many other smRNA-seq analysis pipelines out there doing very similar things, and choosing the best bioinformatics tool can be half the challenge when approaching any analyses.  The best approach to making a choice (that I've found) is through reading the literature or googling extensively (SEQanswers and biostars especially).
-
-Any questions?
+This is a beginning primer on smRNA-seq analysis according to the pipeline I use.  There are many other smRNA-seq analysis pipelines out there doing very similar things, and choosing the best bioinformatics tool can be half the challenge when approaching any analyses.  The best approach to making a choice (that I've found) is by reading the literature or googling extensively (SEQanswers and biostars especially).
