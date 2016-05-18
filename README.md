@@ -93,7 +93,8 @@ module load perl/5.12.0
 uncENV.sh contains the location of programs used by the pipeline, the location of various files called on by the pipeline, and the commands to load the necessary modules.  We can execute the code within this file by typing 
 ```
 source uncENV.sh
-```  If we type 'module list' we should see the following output, confirming the necessary modules were loaded.
+```  
+If we type 'module list' we should see the following output, confirming the necessary modules were loaded.
 
 ```
 $ module list
