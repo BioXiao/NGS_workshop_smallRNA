@@ -300,7 +300,7 @@ $ python genNormalRPM.py mmu /netscr/mattkank/miRquant/03_samples/SampleA./TAB_l
 $ ls RPM*
 RPM_all.tsv  RPM_miRs_only.tsv  RPM_miRs_over_100.tsv
 
-$ head RPM_miRs_over_1000.tsv
+$ head RPM_miRs_over_100.tsv
 	/netscr/mattkank/miRquant/03_samples/test./TAB_lenDist_summary.txt
 mmu-mir-15a-5p	259.100909414
 mmu-mir-191-5p	1829.90017274
