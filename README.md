@@ -217,6 +217,9 @@ Currently Loaded Modulefiles:
 
 #### Generate mapping statistics
 
+COPY THE FINAL OUTPUTS
+```cp -r /netscr/mattkank/miRquant/06_final_output_scripts/archived_results/ .```
+
 Lets start by looking at some quality control statistics from the analyses.  The 'generate_mapping__info_table.pl' will bring together mapping statistics, including total mapping, miR mapping, and tRNA mapping.  Up to this point we have been using the absolute path for the files.  This script requires the relative path.  To run this script, enter:
 
 ```
