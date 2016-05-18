@@ -1,4 +1,9 @@
 # Small RNA analysis
+TRIM DOWN TO JUST A COUPLE CHROMOSOMES
+FLOOR THE VALUES TO AVOID DECIMALS
+
+
+
 Practical for the smallRNA section of the NGS workshop.
 
 While useful for those interested in small RNA analysis, this section will provide an example of what goes into the running of a typical bioinformatics pipeline.
@@ -85,9 +90,13 @@ module load bedtools/2.25.0
 module load bamtools/1.0.2
 module load perl/5.12.0
 ```
-uncENV.sh contains the location of programs used by the pipeline, the location of various files called on by the pipeline, and the commands to load the necessary modules.  We can execute the code within this file by typing `source uncENV.sh`.  If we type `module list` we should see the following output, confirming the necessary modules were loaded.
+uncENV.sh contains the location of programs used by the pipeline, the location of various files called on by the pipeline, and the commands to load the necessary modules.  We can execute the code within this file by typing 
+```
+source uncENV.sh
+```  If we type 'module list' we should see the following output, confirming the necessary modules were loaded.
 
 ```
+$ module list
 Currently Loaded Modulefiles:
   1) null              2) r/2.15.1          3) bowtie/1.1.0      4) samtools/1.3      5) bedtools/2.25.0   6) bamtools/1.0.2    7) perl/5.12.0
 ```
