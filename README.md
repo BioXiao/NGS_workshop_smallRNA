@@ -225,7 +225,7 @@ Lets start by looking at some quality control statistics from the analyses.  The
 ```
 $ perl generate_mapping_info_table.pl ../03_samples/SampleA./*.stats
 
-$ cat MappingTableInfo.tsv
+$ cat MappingInfoTable.tsv
 
 Sample name	SampleA
 File name	/netscr/mattkank/miRquant/03_samples/test.fastq
